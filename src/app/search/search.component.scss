@@ -1,4 +1,5 @@
 .main__container {
+  width: 100%;
   height: fit-content;
   min-height: 100%;
   .search__container {
@@ -6,5 +7,13 @@
     mat-form-field {
       width: 100%;
     }
+  }
+}
+// Responsive design
+
+@media (min-width: 768px) {
+  .search__container {
+    width: 50%;
+    margin-left: 25%;
   }
 }

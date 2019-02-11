@@ -130,3 +130,34 @@
 .row__container.back__button {
   margin: 5%;
 }
+
+// Responsive design
+
+@media (min-width: 768px) {
+  .row__container {
+    width: 70%;
+    margin-left: 15%;
+  }
+  .user__container {
+    .user__card {
+      img {
+        margin-top: 10px !important;
+      }
+    }
+  }
+  .github-card {
+    width: 50%;
+    margin-left: 25%;
+  }
+}
+@media (max-width: 767px) {
+  .user__container {
+    width: 100% !important;
+    .user__card {
+      img {
+        width: 100px !important;
+        margin-top: 5px !important;
+      }
+    }
+  }
+}
