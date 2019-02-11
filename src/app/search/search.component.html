@@ -40,7 +40,9 @@
         </span>
       </div>
     </form>
-    <div></div>
+    <div class="total--users" *ngIf="showData">
+      <span>We have found {{ total }} users!</span>
+    </div>
     <div *ngIf="loading">
       <mat-progress-bar mode="indeterminate"></mat-progress-bar>
     </div>

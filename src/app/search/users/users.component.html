@@ -50,7 +50,7 @@
   </div>
   <div class="github-card user-card">
     <div class="header User"></div>
-    <a class="avatar">
+    <a target="_blank" href="{{ userDetails.html_url }}" class="avatar">
       <img src="{{ userDetails.avatar_url }}" alt="{{ userDetails.name }}" />
     </a>
     <div class="content">
@@ -61,19 +61,19 @@
       </div>
       <ul class="status">
         <li>
-          <a href="{{ userDetails.html_url }}">
+          <a target="_blank" href="{{ userDetails.html_url }}">
             <strong>{{ userDetails.public_repos }}</strong
             >Repos
           </a>
         </li>
         <li>
-          <a href="{{ userDetails.html_url }}">
+          <a target="_blank" href="{{ userDetails.html_url }}">
             <strong>{{ userDetails.public_gists }}</strong
             >Gists
           </a>
         </li>
         <li>
-          <a href="{{ userDetails.html_url }}">
+          <a target="_blank" href="{{ userDetails.html_url }}">
             <strong>{{ userDetails.followers }}</strong
             >Followers
           </a>
