@@ -1,0 +1,14 @@
+.navbar {
+  height: 60px;
+  margin-bottom: 10px;
+  background: #24292e;
+  text-align: center;
+  .navbar-header {
+    a {
+      color: white;
+      font-size: 2.4rem;
+      text-decoration: none;
+      line-height: 3.4rem;
+    }
+  }
+}

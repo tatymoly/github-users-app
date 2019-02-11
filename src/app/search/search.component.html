@@ -1,0 +1,35 @@
+<app-header></app-header>
+<div class="main__container">
+  <div class="search__container" *ngIf="!hideSearchBar">
+    <form (ngSubmit)="searchUser(1)" [formGroup]="searchForm">
+      <mat-form-field class="example-full-width">
+        <input
+          matInput
+          placeholder="Search User"
+          formControlName="user"
+          [errorStateMatcher]="matcher"
+        />
+        <mat-error *ngIf="searchForm.get('user').hasError('required')">
+          Username is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <div>
+        <button [disabled]="loading" mat-raised-button color="primary">
+          Search
+        </button>
+      </div>
+    </form>
+    <div *ngIf="loading">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+  </div>
+  <app-users
+    *ngIf="showData"
+    [users]="users"
+    [total]="total"
+    (page)="getPage($event)"
+    (hideSearchBar)="hideBar($event)"
+  ></app-users>
+</div>
+<app-footer></app-footer>

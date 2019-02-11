@@ -1,0 +1,10 @@
+.main__container {
+  height: fit-content;
+  min-height: 100%;
+  .search__container {
+    padding: 5%;
+    mat-form-field {
+      width: 100%;
+    }
+  }
+}

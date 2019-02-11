@@ -1,0 +1,84 @@
+<div class="row__container" *ngIf="!showDetails">
+  <div
+    class="user__container"
+    *ngFor="
+      let user of (users
+        | paginate
+          : {
+              id: 'request',
+              itemsPerPage: 30,
+              currentPage: p,
+              totalItems: total
+            })
+    "
+  >
+    <div>
+      <div class="user__card">
+        <img src="{{ user.avatar_url }}" alt="" />
+        <div class="user__options">
+          <h2>
+            {{ user.login }}
+          </h2>
+          <button
+            mat-raised-button
+            color="accent"
+            (click)="requestUserDetails(user.login); hideSearch(true)"
+          >
+            See details
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="paginator">
+    <pagination-controls
+      (pageChange)="sendPage($event)"
+      id="request"
+    ></pagination-controls>
+  </div>
+</div>
+
+<div *ngIf="showDetails">
+  <div class="row__container back__button">
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="showResults(); hideSearch(false)"
+    >
+      Back
+    </button>
+  </div>
+  <div class="github-card user-card">
+    <div class="header User"></div>
+    <a class="avatar">
+      <img src="{{ userDetails.avatar_url }}" alt="{{ userDetails.name }}" />
+    </a>
+    <div class="content">
+      <h1>{{ userDetails.name }}</h1>
+      <span>@{{ userDetails.login }}</span>
+      <div>
+        <p>{{ userDetails.bio }}</p>
+      </div>
+      <ul class="status">
+        <li>
+          <a href="{{ userDetails.html_url }}">
+            <strong>{{ userDetails.public_repos }}</strong
+            >Repos
+          </a>
+        </li>
+        <li>
+          <a href="{{ userDetails.html_url }}">
+            <strong>{{ userDetails.public_gists }}</strong
+            >Gists
+          </a>
+        </li>
+        <li>
+          <a href="{{ userDetails.html_url }}">
+            <strong>{{ userDetails.followers }}</strong
+            >Followers
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

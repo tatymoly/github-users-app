@@ -1,0 +1,132 @@
+.row__container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  .user__container {
+    width: 40%;
+    margin: 2% 4%;
+    height: 110px;
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    box-shadow: 1px 1px #b0bec599;
+    .user__card {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      padding-left: 10%;
+
+      img {
+        width: 25%;
+        height: 20%;
+        border-radius: 100%;
+        margin-top: 20px;
+      }
+      .user__options {
+        width: 60%;
+        margin-left: 5%;
+        text-align: center;
+        h2 {
+          font-size: 20px;
+          text-decoration: none;
+          color: gray;
+        }
+      }
+    }
+  }
+  .paginator {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.github-card {
+  text-align: center;
+  border-radius: 5px;
+  background: #fff;
+  color: #555;
+  position: relative;
+  width: 80%;
+  margin-left: 10%;
+  .header {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    height: 148px;
+    border-radius: 4px 4px 0 0;
+    background-size: cover;
+    background-position: center;
+    background-color: #000;
+
+    background-image: url('https://images.pexels.com/photos/433604/pexels-photo-433604.jpeg?cs=srgb&dl=blur-close-up-desk-433604.jpg&fm=jpg');
+  }
+  .avatar {
+    display: inline-block;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 100%;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+    margin-top: -40px;
+    border: 3px solid #fff;
+    position: relative;
+    img {
+      display: block;
+      width: 80px;
+      height: 80px;
+    }
+  }
+  .content {
+    p {
+      width: 90%;
+      margin-left: 5%;
+    }
+  }
+  .User {
+    background-position: top left;
+  }
+  h1 {
+    color: #111;
+    font-size: 24px;
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: -0.06em;
+    margin: 16px 0 20px;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+  }
+  ul {
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #707070;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    zoom: 1;
+    li {
+      width: 33%;
+      float: left;
+      padding: 8px 0;
+      box-shadow: 1px 0 0 #eee;
+      a {
+        color: #707070;
+        text-decoration: none;
+      }
+      a:hover {
+        color: #4183c4;
+      }
+
+      strong {
+        display: block;
+        color: #292f33;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+    }
+  }
+}
+.row__container.back__button {
+  margin: 5%;
+}
