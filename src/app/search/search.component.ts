@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GithubService } from '../shared/services/github.service';
 import { takeUntil } from 'rxjs/operators';
@@ -9,14 +9,17 @@ import { Subject } from 'rxjs';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
   p = 1;
   total: number;
   loading = false;
   showData = false;
+  hideSearchBar = false;
+  showError = false;
   searchForm: FormGroup;
   users;
-  hideSearchBar = false;
+
+  private unsub: Subject<any> = new Subject();
 
   constructor(private fb: FormBuilder, private githubService: GithubService) {}
 
@@ -40,13 +43,21 @@ export class SearchComponent implements OnInit {
   searchUser(page: number) {
     this.loading = true;
     const user = this.searchForm.get('user').value;
-    this.githubService.searchUsers(user, page).subscribe(res => {
-      this.total = res.total_count;
-      this.p = page;
-      this.users = res.items;
-      this.showData = true;
-      this.loading = false;
-    });
+    this.githubService
+      .searchUsers(user, page)
+      .pipe(takeUntil(this.unsub))
+      .subscribe(res => {
+        this.total = res.total_count;
+        if (this.total === 0) {
+          this.showError = true;
+        } else {
+          this.showError = false;
+        }
+        this.p = page;
+        this.users = res.items;
+        this.showData = true;
+        this.loading = false;
+      });
   }
 
   getPage($event) {
@@ -56,5 +67,17 @@ export class SearchComponent implements OnInit {
 
   hideBar($event) {
     this.hideSearchBar = $event;
+  }
+
+  clearSearch() {
+    this.searchForm.reset();
+    this.showError = false;
+    this.users = [];
+    this.showData = false;
+  }
+
+  ngOnDestroy() {
+    this.unsub.next();
+    this.unsub.complete();
   }
 }

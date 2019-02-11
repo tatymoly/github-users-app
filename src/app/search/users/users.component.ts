@@ -1,4 +1,12 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnDestroy,
+} from '@angular/core';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 import { GithubService } from '../../shared/services/github.service';
 
@@ -7,7 +15,7 @@ import { GithubService } from '../../shared/services/github.service';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })
-export class UsersComponent {
+export class UsersComponent implements OnDestroy {
   @Input() total;
   @Input() users;
   @Output() page = new EventEmitter();
@@ -16,6 +24,9 @@ export class UsersComponent {
   showDetails = false;
   userDetails;
   p;
+
+  private unsub: Subject<any> = new Subject();
+
   constructor(private githubService: GithubService) {}
 
   sendPage($event) {
@@ -24,10 +35,13 @@ export class UsersComponent {
   }
 
   requestUserDetails(user) {
-    this.githubService.searchUserDetails(user).subscribe(res => {
-      this.userDetails = res;
-      this.showDetails = true;
-    });
+    this.githubService
+      .searchUserDetails(user)
+      .pipe(takeUntil(this.unsub))
+      .subscribe(res => {
+        this.userDetails = res;
+        this.showDetails = true;
+      });
   }
 
   showResults() {
@@ -36,5 +50,9 @@ export class UsersComponent {
 
   hideSearch(search: boolean) {
     this.hideSearchBar.emit(search);
+  }
+  ngOnDestroy() {
+    this.unsub.next();
+    this.unsub.complete();
   }
 }

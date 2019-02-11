@@ -14,12 +14,33 @@
         </mat-error>
       </mat-form-field>
 
-      <div>
-        <button [disabled]="loading" mat-raised-button color="primary">
+      <div class="search_buttons">
+        <button
+          type="submit"
+          [disabled]="loading"
+          mat-raised-button
+          color="primary"
+        >
           Search
         </button>
+        <button
+          type="button"
+          (click)="clearSearch()"
+          [disabled]="loading"
+          mat-raised-button
+          color="accent"
+          class="cear--button"
+        >
+          clear
+        </button>
+      </div>
+      <div class="user__error">
+        <span *ngIf="showError">
+          Oops!! We couldn't find any user, please try a different one 😅
+        </span>
       </div>
     </form>
+    <div></div>
     <div *ngIf="loading">
       <mat-progress-bar mode="indeterminate"></mat-progress-bar>
     </div>
